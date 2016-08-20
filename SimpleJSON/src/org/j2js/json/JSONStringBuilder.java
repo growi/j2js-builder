@@ -65,11 +65,11 @@ public class JSONStringBuilder
 
 			if( it.hasNext() )
 			{
-				builder.append(',');
+				builder.append( ',' );
 			}
 		}
 
-		builder.append(']');
+		builder.append( ']' );
 
 		return builder.toString();
 	}
@@ -78,19 +78,24 @@ public class JSONStringBuilder
 	{
 		StringBuilder builder = new StringBuilder();
 
-		builder.append('{');
+		builder.append( '{' );
 
 		for( Iterator<String> it = input.properties(); it.hasNext(); )
 		{
-			builder.append( write( input.get( it.next() ) ) );
+			final String property = it.next();
+			builder.append( '"' );
+			builder.append( property );
+			builder.append( '"' );
+			builder.append( ':' );
+			builder.append( write( input.get( property ) ) );
 
 			if( it.hasNext() )
 			{
-				builder.append(',');
+				builder.append( ',' );
 			}
 		}
 
-		builder.append('}');
+		builder.append( '}' );
 
 		return builder.toString();
 	}
@@ -101,11 +106,11 @@ public class JSONStringBuilder
 		{
 			if( m_locale == null )
 			{
-				return ((JSONNumberValue)input).getValue();
+				return ((JSONNumberValue) input).getValue();
 			}
 			else
 			{
-				return ((JSONNumberValue)input).getValue( m_locale );
+				return ((JSONNumberValue) input).getValue( m_locale );
 			}
 		}
 		else if( input instanceof JSONDateTimeValue )
@@ -118,14 +123,14 @@ public class JSONStringBuilder
 			}
 			else if( m_locale == null )
 			{
-				sdf = new SimpleDateFormat(m_datePattern);
+				sdf = new SimpleDateFormat( m_datePattern );
 			}
 			else
 			{
-				sdf = new SimpleDateFormat(m_datePattern, m_locale);
+				sdf = new SimpleDateFormat( m_datePattern, m_locale );
 			}
 
-			return ((JSONDateTimeValue) input).getValue(sdf);
+			return ((JSONDateTimeValue) input).getValue( sdf );
 		}
 		else
 		{
