@@ -9,6 +9,8 @@ import org.j2js.json.values.JSONNumberValue;
 
 public class JSONStringBuilder
 {
+	private StringBuilder m_builder = new StringBuilder();
+
 	private final String m_datePattern;
 	private final Locale m_locale;
 
@@ -33,19 +35,25 @@ public class JSONStringBuilder
 		m_locale      = locale;
 	}
 
-	public String write(final JSONEntity input) throws IllegalArgumentException
+	@Override
+	public String toString()
+	{
+		return m_builder.toString();
+	}
+
+	public void write(final JSONEntity input) throws IllegalArgumentException
 	{
 		if( input instanceof JSONArray )
 		{
-			return write( (JSONArray)input );
+			write( (JSONArray)input );
 		}
 		else if( input instanceof JSONObject )
 		{
-			return write( (JSONObject)input );
+			write( (JSONObject)input );
 		}
 		else if( input instanceof JSONValue )
 		{
-			return write( (JSONValue)input );
+			write( (JSONValue)input );
 		}
 		else
 		{
@@ -53,64 +61,56 @@ public class JSONStringBuilder
 		}
 	}
 
-	public String write(final JSONArray input)
+	private void write(final JSONArray input)
 	{
-		StringBuilder builder = new StringBuilder();
-
-		builder.append('[');
+		m_builder.append('[');
 
 		for( Iterator<JSONEntity> it = input.iterator(); it.hasNext(); )
 		{
-			builder.append( write( it.next() ) );
+			write( it.next() );
 
 			if( it.hasNext() )
 			{
-				builder.append( ',' );
+				m_builder.append( ',' );
 			}
 		}
 
-		builder.append( ']' );
-
-		return builder.toString();
+		m_builder.append( ']' );
 	}
 
-	public String write(final JSONObject input)
+	private void write(final JSONObject input)
 	{
-		StringBuilder builder = new StringBuilder();
-
-		builder.append( '{' );
+		m_builder.append( '{' );
 
 		for( Iterator<String> it = input.properties(); it.hasNext(); )
 		{
 			final String property = it.next();
-			builder.append( '"' );
-			builder.append( property );
-			builder.append( '"' );
-			builder.append( ':' );
-			builder.append( write( input.get( property ) ) );
+			m_builder.append( '"' );
+			m_builder.append( property );
+			m_builder.append( '"' );
+			m_builder.append( ':' );
+			write( input.get( property ) );
 
 			if( it.hasNext() )
 			{
-				builder.append( ',' );
+				m_builder.append( ',' );
 			}
 		}
 
-		builder.append( '}' );
-
-		return builder.toString();
+		m_builder.append( '}' );
 	}
 
-	public String write(final JSONValue input)
+	private void write(final JSONValue input)
 	{
 		if( input instanceof JSONNumberValue )
 		{
 			if( m_locale == null )
 			{
-				return ((JSONNumberValue) input).getValue();
+				m_builder.append( ((JSONNumberValue) input).getValue() );
 			}
 			else
 			{
-				return ((JSONNumberValue) input).getValue( m_locale );
+				m_builder.append( ((JSONNumberValue) input).getValue( m_locale ) );
 			}
 		}
 		else if( input instanceof JSONDateTimeValue )
@@ -130,11 +130,11 @@ public class JSONStringBuilder
 				sdf = new SimpleDateFormat( m_datePattern, m_locale );
 			}
 
-			return ((JSONDateTimeValue) input).getValue( sdf );
+			m_builder.append(  ((JSONDateTimeValue) input).getValue( sdf ) );
 		}
 		else
 		{
-			return input.getValue();
+			m_builder.append( input.getValue() );
 		}
 	}
 }
