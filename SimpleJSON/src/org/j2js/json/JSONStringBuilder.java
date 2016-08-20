@@ -49,7 +49,7 @@ public class JSONStringBuilder
 		}
 		else
 		{
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(input + " does not extend JSONEntity");
 		}
 	}
 
