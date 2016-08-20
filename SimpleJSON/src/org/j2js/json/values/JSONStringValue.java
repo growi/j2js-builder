@@ -12,6 +12,6 @@ public class JSONStringValue extends JSONValue {
 	
 	@Override
 	public String getValue() {
-		return m_value == null ? this.getNull() : this.quote( m_value );
+		return m_value == null ? JSONStringValue.getNull() : this.quote( m_value );
 	}
 }

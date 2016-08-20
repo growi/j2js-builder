@@ -12,7 +12,7 @@ public class JSONBooleanValue extends JSONValue {
 		
 	@Override
 	public String getValue() {
-		return m_boolean  == null ? this.getNull() : m_boolean.toString();
+		return m_boolean  == null ? JSONBooleanValue.getNull() : m_boolean.toString();
 	}
 
 }

@@ -15,10 +15,10 @@ public class JSONNumberValue extends JSONValue {
 	
 	@Override
 	public String getValue() {
-		return m_number  == null ? this.getNull() : NumberFormat.getNumberInstance().format( m_number );
+		return m_number  == null ? JSONNumberValue.getNull() : NumberFormat.getNumberInstance().format( m_number );
 	}
 
 	public String getValue( Locale locale ) {
-		return m_number  == null ? this.getNull() : NumberFormat.getNumberInstance( locale ).format( m_number );
+		return m_number  == null ? JSONNumberValue.getNull() : NumberFormat.getNumberInstance( locale ).format( m_number );
 	}
 }

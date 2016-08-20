@@ -15,11 +15,11 @@ public class JSONDateTimeValue extends JSONValue {
 
 	@Override
 	public String getValue() {
-		return m_date  == null ? this.getNull() : DateFormat.getDateInstance().format( m_date );
+		return m_date  == null ? JSONDateTimeValue.getNull() : DateFormat.getDateInstance().format( m_date );
 	}
 
 	public String getValue( DateFormat formatter ) {
-		return m_date  == null ? this.getNull() : this.quote( formatter.format( m_date ) ); 
+		return m_date  == null ? JSONDateTimeValue.getNull() : this.quote( formatter.format( m_date ) ); 
 	}
 	
 }
