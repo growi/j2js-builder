@@ -5,7 +5,7 @@ import java.util.Iterator;
 public interface JSONObject extends JSONEntity {
 
 	public Iterator<String> properties();
-	
-	public Object get( String property );
-		
+
+	public JSONEntity get( String property );
+
 }
