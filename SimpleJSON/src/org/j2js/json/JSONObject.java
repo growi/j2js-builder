@@ -2,7 +2,7 @@ package org.j2js.json;
 
 import java.util.Iterator;
 
-public interface JSONObject {
+public interface JSONObject extends JSONEntity {
 
 	public Iterator<String> properties();
 	

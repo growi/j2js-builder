@@ -2,8 +2,8 @@ package org.j2js.json;
 
 import java.util.Iterator;
 
-public interface JSONArray extends Iterable{
+public interface JSONArray extends JSONEntity, Iterable{
 	
-	public Iterator iterator();
-
+	public abstract Iterator iterator();
+	
 }
