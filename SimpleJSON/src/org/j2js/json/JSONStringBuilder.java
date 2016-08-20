@@ -30,7 +30,7 @@ public class JSONStringBuilder
 	public JSONStringBuilder(final String datePattern, final Locale locale)
 	{
 		m_datePattern = datePattern;
-		m_locale      = locale == null ? Locale.getDefault() : locale;
+		m_locale      = locale;
 	}
 
 	public String write(final JSONEntity input) throws IllegalArgumentException
@@ -99,7 +99,14 @@ public class JSONStringBuilder
 	{
 		if( input instanceof JSONNumberValue )
 		{
-			return ((JSONNumberValue)input).getValue();
+			if( m_locale == null )
+			{
+				return ((JSONNumberValue)input).getValue();
+			}
+			else
+			{
+				return ((JSONNumberValue)input).getValue( m_locale );
+			}
 		}
 		else if( input instanceof JSONDateTimeValue )
 		{
