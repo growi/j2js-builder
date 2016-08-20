@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.j2js.json.JSONArray;
+import org.j2js.json.JSONEntity;
 
 public class JSONListAdapter implements JSONArray {
 	
@@ -13,10 +14,9 @@ public class JSONListAdapter implements JSONArray {
 		m_list = list;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
-	public Iterator iterator() {
-		return new Iterator(){
+	public Iterator<JSONEntity> iterator() {
+		return new Iterator<JSONEntity>(){
 			
 			int m_index = -1; 
 
@@ -26,7 +26,7 @@ public class JSONListAdapter implements JSONArray {
 			}
 
 			@Override
-			public Object next() {
+			public JSONEntity next() {
 				//return JSONAdapterFactory.getAdapter(  m_list.get( ++m_index ) );
 				return null;
 			}
