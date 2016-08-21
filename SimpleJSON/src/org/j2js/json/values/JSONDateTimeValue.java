@@ -18,6 +18,10 @@ public class JSONDateTimeValue extends JSONValue {
 		return m_date  == null ? JSONDateTimeValue.getNull() : DateFormat.getDateInstance().format( m_date );
 	}
 
+	/**
+	 * @param formatter
+	 * @return
+	 */
 	public String getValue( DateFormat formatter ) {
 		return m_date  == null ? JSONDateTimeValue.getNull() : this.quote( formatter.format( m_date ) ); 
 	}
