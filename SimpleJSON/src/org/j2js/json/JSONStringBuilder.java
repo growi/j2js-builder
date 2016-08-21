@@ -38,7 +38,7 @@ public class JSONStringBuilder
 	@Override
 	public String toString()
 	{
-		return m_builder.length() == 0 ? "{}" : m_builder.toString();
+		return m_builder.length() == 0 ? "null" : m_builder.toString();
 	}
 
 	/**
