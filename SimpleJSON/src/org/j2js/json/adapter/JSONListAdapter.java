@@ -10,10 +10,16 @@ public class JSONListAdapter implements JSONArray {
 	
 	List<?> m_list;
 	
+	/**
+	 * @param list
+	 */
 	public JSONListAdapter( List<?> list ){
 		m_list = list;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.j2js.json.JSONArray#iterator()
+	 */
 	@Override
 	public Iterator<JSONEntity> iterator() {
 		return new Iterator<JSONEntity>(){
@@ -28,7 +34,6 @@ public class JSONListAdapter implements JSONArray {
 			@Override
 			public JSONEntity next() {
 				return JSONEntityFactory.getInstance().getAdapter(  m_list.get( ++m_index ) );
-
 			}
 		};
 	}

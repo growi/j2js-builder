@@ -14,6 +14,9 @@ public class JSONEntityFactory {
 	protected JSONEntityFactory(){
 	}
 	
+	/**
+	 * @return
+	 */
 	public static JSONEntityFactory getInstance(){
 		if( m_instance == null ){
 			m_instance = new JSONEntityFactory();	
@@ -21,6 +24,10 @@ public class JSONEntityFactory {
 		return m_instance;
 	}
 	
+	/**
+	 * @param o
+	 * @return
+	 */
 	public JSONEntity getAdapter( Object o ){
 		if( o == null ) return NULL_VALUE;
 		if( o instanceof String ) return getAdapter( (String)o );
@@ -31,22 +38,42 @@ public class JSONEntityFactory {
 		return null;
 	}
 	
+	/**
+	 * @param value
+	 * @return
+	 */
 	public JSONEntity getAdapter( String value ){
 		return value == null ? NULL_VALUE : new JSONStringValue( value );
 	}
 	
+	/**
+	 * @param value
+	 * @return
+	 */
 	public JSONEntity getAdapter( Number value ){
 		return value == null ? NULL_VALUE : new JSONNumberValue( value );
 	}
 	
+	/**
+	 * @param value
+	 * @return
+	 */
 	public JSONEntity getAdapter( Boolean value ){
 		return value == null ? NULL_VALUE : new JSONBooleanValue( value );
 	}
 	
+	/**
+	 * @param value
+	 * @return
+	 */
 	public JSONEntity getAdapter( Date value ){
 		return value == null ? NULL_VALUE : new JSONDateTimeValue( value );
 	}
 
+	/**
+	 * @param value
+	 * @return
+	 */
 	public JSONEntity getAdapter( List<?> value ){
 		return value == null ? NULL_VALUE : new JSONListAdapter( (List<?>) value );
 	}

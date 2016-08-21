@@ -18,6 +18,10 @@ public class JSONNumberValue extends JSONValue {
 		return m_number  == null ? JSONNumberValue.getNull() : NumberFormat.getNumberInstance().format( m_number );
 	}
 
+	/**
+	 * @param locale
+	 * @return
+	 */
 	public String getValue( Locale locale ) {
 		return m_number  == null ? JSONNumberValue.getNull() : NumberFormat.getNumberInstance( locale ).format( m_number );
 	}
