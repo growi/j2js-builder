@@ -38,11 +38,30 @@ public class JSONStringBuilder
 	@Override
 	public String toString()
 	{
-		return m_builder.toString();
+		return m_builder.length() == 0 ? "{}" : m_builder.toString();
 	}
 
-	public void write(final JSONEntity input) throws IllegalArgumentException
+	/**
+	 * Flushes the intern string buffer.
+	 */
+	public void flush()
 	{
+		m_builder = new StringBuilder();
+	}
+
+	/**
+	 * Builds and writes stringified JSON to the intern string buffer. Call toString method to get the result.
+	 * @param input
+	 * @throws IllegalStateException If write before flush
+	 * @throws IllegalArgumentException If the input is an unknown JSONEntity
+	 */
+	public void write(final JSONEntity input) throws IllegalStateException, IllegalArgumentException
+	{
+		if( m_builder.length() > 0 )
+		{
+			throw new IllegalStateException("JSONStringBuilder can not be reused until flushed");
+		}
+
 		if( input instanceof JSONArray )
 		{
 			write( (JSONArray)input );
@@ -57,7 +76,7 @@ public class JSONStringBuilder
 		}
 		else
 		{
-			throw new IllegalArgumentException(input + " does not extend JSONEntity");
+			throw new IllegalArgumentException(input + " is an unknown JSONEntity");
 		}
 	}
 
