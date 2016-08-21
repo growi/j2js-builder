@@ -42,7 +42,7 @@ public class JSONStringBuilder
 	}
 
 	/**
-	 * Flushes the intern string buffer.
+	 * Flushes the internal string buffer.
 	 */
 	public void flush()
 	{
@@ -50,18 +50,23 @@ public class JSONStringBuilder
 	}
 
 	/**
-	 * Builds and writes stringified JSON to the intern string buffer. Call toString method to get the result.
+	 * Builds and writes stringified JSON to the internal string buffer. Call toString method to get the result.
 	 * @param input
 	 * @throws IllegalStateException If write before flush
 	 * @throws IllegalArgumentException If the input is an unknown JSONEntity
 	 */
-	public void write(final JSONEntity input) throws IllegalStateException, IllegalArgumentException
+	public void build(final JSONEntity input) throws IllegalStateException, IllegalArgumentException
 	{
 		if( m_builder.length() > 0 )
 		{
 			throw new IllegalStateException("JSONStringBuilder can not be reused until flushed");
 		}
 
+		write( input );
+	}
+
+	private void write(final JSONEntity input) throws IllegalArgumentException
+	{
 		if( input instanceof JSONArray )
 		{
 			write( (JSONArray)input );
