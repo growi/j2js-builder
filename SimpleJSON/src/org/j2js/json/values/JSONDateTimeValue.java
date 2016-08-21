@@ -7,7 +7,7 @@ import org.j2js.json.JSONValue;
 
 public class JSONDateTimeValue extends JSONValue {
 	
-	Date m_date;
+	private Date m_date;
 		
 	public JSONDateTimeValue( Date date ){
 		m_date = date;

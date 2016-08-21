@@ -27,8 +27,8 @@ public class JSONListAdapter implements JSONArray {
 
 			@Override
 			public JSONEntity next() {
-				//return JSONAdapterFactory.getAdapter(  m_list.get( ++m_index ) );
-				return null;
+				return JSONEntityFactory.getInstance().getAdapter(  m_list.get( ++m_index ) );
+
 			}
 		};
 	}
